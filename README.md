@@ -36,7 +36,7 @@
 Склонируйте репозиторий на свой компьютер:
 
 ```bash
-git clone https://github.com/yourusername/todo-app.git
+git clone https://github.com/sinooox/todo-app.git
 ```
 
 ### **2. Откройте проект в Android Studio**
