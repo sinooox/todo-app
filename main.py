@@ -1,34 +1,47 @@
-import psycopg2
+from connect import connect_to_db
+from hash_password import get_hashed_password, verify_password
+from insert import insert_data
 
-def get_data():
-    conn_params = {"host":"localhost",
-                   "port": 5432,
-                   "database": "tododb",
-                   "user": "postgres",
-                   "password": "qwerty"}
+conn, cursor = connect_to_db()
 
-    try:
-        connection = psycopg2.connect(**conn_params)
-        cursor = connection.cursor()
-        print("Connected to the database successfully!")
 
-        query = "SELECT * FROM notes;"
-        cursor.execute(query)
+#основная функция для проверки зарегестрирован ли пользователь
+def check_user():
+    username = input("Введите имя пользователя: ")
 
-        rows = cursor.fetchall()
+    conn, cursor = connect_to_db()
+    query = "SELECT password, salt FROM users WHERE username = %s;"
+    cursor.execute(query, (username,))
+    result = cursor.fetchone()
 
-        for row in rows:
-            print(row)
+    if result is None:
+        print("Пользователь не найден.")
+        answer = input("Хотите зарегистрироваться? (да/нет): ")
+        if answer.lower() == "да":
+            username, hashed_password, salt = register_user()
+            insert_data(username, hashed_password, salt)
+        else:
+            return
+    else:
+        password = input("Введите пароль: ")
+        stored_hash, stored_salt = result
+        if verify_password(stored_hash, stored_salt, password):
+            print("Аутентификация успешна!")
+            return True
+        else:
+            print("Неверный пароль.")
+            return False
 
-    except Exception as error:
-        print("Error while fetching data:", error)
 
-    finally:
-        if cursor:
-            cursor.close()
-        if connection:
-            connection.close()
-        print("PostgreSQL connection closed.")
+#функция регистрации пользователя
+def register_user():
+    username = input("Введите имя пользователя: ")
+    password = input("Введите пароль: ")
+    
+    hashed_password, salt = get_hashed_password(password)
+    return username, hashed_password, salt
+
+
 
 if __name__ == "__main__":
-    get_data()
+     check_user()
