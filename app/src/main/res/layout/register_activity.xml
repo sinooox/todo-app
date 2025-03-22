@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/register"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main"
+    tools:context=".LoginActivity">
+
+    <View
+        android:id="@+id/backgroundView"
+        android:layout_width="319dp"
+        android:layout_height="470dp"
+        android:background="@drawable/rounded_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.463" />
+
+    <TextView
+        android:id="@+id/loginText"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:fontFamily="@font/poiret_one"
+        android:gravity="center"
+        android:text="Регистрация"
+        android:textColor="@color/main"
+        android:textSize="42sp"
+        app:layout_constraintBottom_toTopOf="@+id/loginInput"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundView"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/backgroundView"
+        app:layout_constraintTop_toTopOf="@+id/backgroundView"
+        app:layout_constraintVertical_bias="0.782" />
+
+    <EditText
+        android:id="@+id/loginInput"
+        android:layout_width="230dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="12dp"
+        android:ems="10"
+        android:fontFamily="@font/poiret_one"
+        android:hint="Логин"
+        android:inputType="text"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray"
+        app:layout_constraintBottom_toTopOf="@+id/passwordInput"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundView"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="@+id/backgroundView" />
+
+    <EditText
+        android:id="@+id/passwordInput"
+        android:layout_width="230dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="36dp"
+        android:ems="10"
+        android:fontFamily="@font/poiret_one"
+        android:hint="Пароль"
+        android:inputType="textPassword"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray"
+        app:layout_constraintBottom_toTopOf="@+id/registerButton"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundView"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="@+id/backgroundView" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="265dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/poiret_one"
+        android:text="Зарегистрироваться"
+        android:textColor="@color/main"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/loginButton"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundView"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/backgroundView" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="110dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/main"
+        android:fontFamily="@font/poiret_one"
+        android:text="Войти"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundView"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundView"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/backgroundView" />
+</androidx.constraintlayout.widget.ConstraintLayout>
