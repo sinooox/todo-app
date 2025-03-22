@@ -19,8 +19,7 @@ struct RegisterView: View {
 
             VStack {
                 Text("Регистрация")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
+                    .font(.custom("PoiretOne-Regular", size: 42))
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.top, 20)
                     .foregroundColor(Color(red: 0.47, green: 0.33, blue: 0.53))
@@ -28,10 +27,13 @@ struct RegisterView: View {
                 VStack(spacing: 20) {
                     TextField(
                         "", text: $username,
-                        prompt: Text("Логин").foregroundColor(.gray)
+                        prompt: Text("Логин")
+                            .foregroundColor(.gray)
+                            .font(.custom("PoiretOne-Regular", size: 16))
                     )
                     .accentColor(.gray)
                     .foregroundColor(.black)
+                    .font(.custom("PoiretOne-Regular", size: 18))
                     .focused($focusedField, equals: .username)
                     .submitLabel(.next)
                     .onSubmit {
@@ -41,13 +43,15 @@ struct RegisterView: View {
                     .background(Color.white)
                     .cornerRadius(10)
                     .shadow(radius: 5)
-
                     SecureField(
                         "", text: $password,
-                        prompt: Text("Пароль").foregroundColor(.gray)
+                        prompt: Text("Пароль")
+                            .foregroundColor(.gray)
+                            .font(.custom("PoiretOne-Regular", size: 16))
                     )
                     .accentColor(.gray)
                     .foregroundColor(.black)
+                    .font(.custom("PoiretOne-Regular", size: 18))
                     .focused($focusedField, equals: .password)
                     .submitLabel(.go)
                     .padding()
@@ -56,8 +60,24 @@ struct RegisterView: View {
                     .shadow(radius: 5)
                 }
                 .padding(.horizontal, 20)
-
                 Button(action: {
+                    if username.trimmingCharacters(in: .whitespacesAndNewlines)
+                        .isEmpty
+                        || password.trimmingCharacters(
+                            in: .whitespacesAndNewlines
+                        ).isEmpty
+                    {
+                        alertMessage =
+                            "Нельзя зарегистрироваться с пустыми данными"
+                        showAlert = true
+                        return
+                    }
+                    if password.count < 8 {
+                        alertMessage =
+                            "Пароль должен содержать не менее 8 символов"
+                        showAlert = true
+                        return
+                    }
                     registerUser(login: username, password: password) {
                         result in
                         switch result {
@@ -67,7 +87,6 @@ struct RegisterView: View {
                                     "Пользователь зарегистрирован\nПеренаправление на страницу\nавторизации"
                                 showAlert = true
                             }
-
                         case .failure(let error):
                             DispatchQueue.main.async {
                                 alertMessage = "\(error.localizedDescription)"
@@ -77,7 +96,7 @@ struct RegisterView: View {
                     }
                 }) {
                     Text("Зарегистрироваться")
-                        .font(.title2)
+                        .font(.custom("PoiretOne-Regular", size: 24))
                         .padding()
                         .foregroundColor(.white)
                         .background(Color(red: 0.52, green: 0.39, blue: 0.58))
@@ -87,12 +106,11 @@ struct RegisterView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 35))
                 .padding(.top, 20)
                 .frame(maxWidth: 400)
-
                 Button(action: {
                     pageManager.page = .LoginView
                 }) {
                     Text("Вход")
-                        .font(.title2)
+                        .font(.custom("PoiretOne-Regular", size: 24))
                         .padding()
                         .foregroundColor(
                             Color(red: 0.47, green: 0.33, blue: 0.53)
@@ -120,9 +138,9 @@ struct RegisterView: View {
                         {
                             pageManager.page = .LoginView
                         }
-                    })
+                    }
+                )
             }
-
         }
     }
 }

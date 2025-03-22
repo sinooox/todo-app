@@ -8,6 +8,7 @@ enum Page {
 
 class PageManager: ObservableObject {
     @Published var page: Page
+    @Published var loginCredentials: (username: String, password: String)? = nil
     init(page: Page) {
         self.page = page
     }
@@ -16,7 +17,6 @@ class PageManager: ObservableObject {
 @main
 struct ToDo_App: App {
     @ObservedObject var pageManager = PageManager(page: .LoginView)
-
     var body: some Scene {
         WindowGroup {
             switch pageManager.page {
