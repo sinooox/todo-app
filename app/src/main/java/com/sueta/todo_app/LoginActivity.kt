@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 
 class LoginActivity : AppCompatActivity() {
     private val loginViewModel: Auth by viewModels()
+    private var currentLogin: String = ""
+    private var currentPassword: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -25,6 +28,8 @@ class LoginActivity : AppCompatActivity() {
             val login = loginEditText.text.toString()
             val password = passwordEditText.text.toString()
             if (login.isNotEmpty() && password.isNotEmpty()) {
+                currentLogin = login
+                currentPassword = password
                 loginViewModel.performLogin(login, password)
             } else {
                 Toast.makeText(this, "Введите логин и пароль", Toast.LENGTH_SHORT).show()
@@ -37,18 +42,15 @@ class LoginActivity : AppCompatActivity() {
         }
 
         loginViewModel.loginResult.observe(this) { result ->
-            result.fold(onSuccess = { Toast.makeText(this, it, Toast.LENGTH_SHORT).show() },
-                onFailure = { Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show() })
-        }
-
-        loginViewModel.userId.observe(this) { userId ->
-            if (userId.isNotEmpty()) {
+            result.fold(onSuccess = {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, MainActivity::class.java).apply {
-                    putExtra("USER_ID", userId)
+                    putExtra("LOGIN", currentLogin)
+                    putExtra("PASSWORD", currentPassword)
                 }
                 startActivity(intent)
                 finish()
-            }
+            }, onFailure = { Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show() })
         }
     }
 }

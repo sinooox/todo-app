@@ -5,17 +5,121 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main"
-    tools:context=".LoginActivity">
+    android:background="@color/main_light"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:id="@+id/logoutButton"
+        android:layout_width="85dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/background_white"
+        app:layout_constraintBottom_toTopOf="@+id/labelView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/todoLabel"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.774">
+
+        <ImageView
+            android:id="@+id/personIcon"
+            android:layout_width="31dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/person" />
+
+        <ImageView
+            android:id="@+id/logoutIcon"
+            android:layout_width="28dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/logout" />
+    </FrameLayout>
+
+    <View
+        android:id="@+id/labelView"
+        android:layout_width="360dp"
+        android:layout_height="65dp"
+        android:background="@drawable/background_white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.165" />
 
     <TextView
-        android:id="@+id/userIdTextView"
-        android:layout_width="250dp"
-        android:layout_height="105dp"
-        android:text="Ваш ID: "
-        android:textSize="24sp"
+        android:id="@+id/todoLabel"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/poiret_one"
+        android:gravity="center"
+        android:shadowColor="@color/text_shadow"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="4"
+        android:text="ToDo App"
+        android:textColor="@color/white"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/labelView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.753" />
+
+    <TextView
+        android:id="@+id/tasksLabel"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:fontFamily="@font/poiret_one"
+        android:shadowColor="@color/text_shadow"
+        android:text="Твои задачи"
+        android:textColor="@color/main"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="@+id/labelView"
+        app:layout_constraintEnd_toEndOf="@+id/labelView"
+        app:layout_constraintHorizontal_bias="0.085"
+        app:layout_constraintStart_toStartOf="@+id/labelView"
+        app:layout_constraintTop_toTopOf="@+id/labelView"
+        app:layout_constraintVertical_bias="0.428" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/notesRecyclerView"
+        android:layout_width="360dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/addButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelView" />
+
+    <ImageButton
+        android:id="@+id/refreshButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/labelView"
+        app:layout_constraintEnd_toEndOf="@+id/labelView"
+        app:layout_constraintHorizontal_bias="0.936"
+        app:layout_constraintStart_toEndOf="@+id/tasksLabel"
+        app:layout_constraintTop_toTopOf="@+id/labelView"
+        app:layout_constraintVertical_bias="0.466"
+        app:srcCompat="@drawable/ic_refresh"
+        app:tint="@color/main" />
+
+    <ImageButton
+        android:id="@+id/addButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="38dp"
+        android:background="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:srcCompat="@drawable/ic_add" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

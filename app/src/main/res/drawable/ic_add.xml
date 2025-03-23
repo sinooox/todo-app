@@ -1,0 +1,18 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/main" />
+        </shape>
+    </item>
+    <item>
+        <vector
+            android:width="50dp"
+            android:height="50dp"
+            android:viewportWidth="960"
+            android:viewportHeight="960">
+            <path
+                android:fillColor="#ffffff"
+                android:pathData="M440,520L200,520v-80h240v-240h80v240h240v80L520,520v240h-80v-240Z" />
+        </vector>
+    </item>
+</layer-list>

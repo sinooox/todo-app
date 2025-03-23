@@ -10,9 +10,9 @@
 
     <View
         android:id="@+id/backgroundView"
-        android:layout_width="319dp"
+        android:layout_width="320dp"
         android:layout_height="470dp"
-        android:background="@drawable/rounded_background"
+        android:background="@drawable/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

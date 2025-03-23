@@ -18,7 +18,6 @@ class Auth : ViewModel() {
     private val _loginResult = MutableLiveData<Result<String>>()
     val loginResult: LiveData<Result<String>> = _loginResult
     private val _userId = MutableLiveData<String>()
-    val userId: LiveData<String> = _userId
 
     fun performLogin(login: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
