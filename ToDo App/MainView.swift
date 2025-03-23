@@ -43,6 +43,7 @@ struct MainView: View {
                     Spacer()
                     Button(action: {
                         if let credentials = pageManager.loginCredentials {
+                            taskViewModel.isManualRefresh = true
                             taskViewModel.fetchTasks(
                                 login: credentials.username,
                                 password: credentials.password)
@@ -96,7 +97,7 @@ struct MainView: View {
                     VStack(spacing: 16) {
                         TextField(
                             "", text: $newTaskNote,
-                            prompt: Text("Новая заметка").foregroundColor(.gray)
+                            prompt: Text("Новая задача").foregroundColor(.gray)
                                 .font(.custom("PoiretOne-Regular", size: 20))
                         )
                         .foregroundColor(.black)
@@ -151,13 +152,19 @@ struct MainView: View {
                     title: Text("Успех"),
                     message: Text("Задача успешно добавлена"),
                     dismissButton: .default(Text("ОК")))
+            case .fetchSuccess:
+                return Alert(
+                    title: Text("Успех"),
+                    message: Text("Список задач обновлен"),
+                    dismissButton: .default(Text("ОК"))
+                )
             }
         }
     }
 
     private func addNewTask() {
         if newTaskNote.isEmpty {
-            taskViewModel.alertType = .error("Нельзя создать пустую заметку")
+            taskViewModel.alertType = .error("Нельзя создать пустую задачу")
             return
         }
         if let credentials = pageManager.loginCredentials {
@@ -188,7 +195,7 @@ struct TaskCard: View {
                     .frame(width: 10, height: 10)
             }
             Text(task.note)
-                .font(Font.custom("Poppins", size: 18))
+                .font(.custom("PoiretOne-Regular", size: 18))
                 .foregroundColor(.black)
                 .multilineTextAlignment(.leading)
                 .lineLimit(nil)

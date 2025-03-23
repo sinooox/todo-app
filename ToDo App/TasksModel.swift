@@ -9,12 +9,14 @@ enum AlertType: Identifiable {
     case error(String)
     case deleteSuccess
     case addSuccess
+    case fetchSuccess
 
     var id: Int {
         switch self {
         case .error: return 0
         case .deleteSuccess: return 1
         case .addSuccess: return 2
+        case .fetchSuccess: return 3
         }
     }
 }
@@ -22,6 +24,7 @@ enum AlertType: Identifiable {
 class TaskViewModel: ObservableObject {
     @Published var tasks: [Task] = []
     @Published var alertType: AlertType?
+    @Published var isManualRefresh = false
 
     func fetchTasks(login: String, password: String) {
         guard let url = URL(string: "http://217.71.129.139:5428/notes") else {
@@ -62,6 +65,10 @@ class TaskViewModel: ObservableObject {
                     let decodedTasks = try JSONDecoder().decode(
                         [Task].self, from: data)
                     self.tasks = decodedTasks
+                    if self.isManualRefresh {
+                        self.alertType = .fetchSuccess
+                        self.isManualRefresh = false
+                    }
                 } catch {
                     self.alertType = .error(
                         "Ошибка декодирования JSON: \(error.localizedDescription)"
